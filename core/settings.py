@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     # third party
     'rest_framework',
 
+    # custom
+    'posts'
 ]
 
 MIDDLEWARE = [
