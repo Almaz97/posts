@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # custom
-    'posts'
+    'posts',
+    'auth_app',
 ]
 
 MIDDLEWARE = [
@@ -117,6 +118,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = ('auth_app.utils.EmailBackend',)
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
