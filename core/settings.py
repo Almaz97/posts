@@ -150,3 +150,19 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# api_key from https://abstractapi.com to validate email, get geolocation data
+EMAIL_API_KEY = env.str('EMAIL_API_KEY')
+IP_API_KEY = env.str('IP_API_KEY')
+HOLIDAYS_API_KEY = env.str('HOLIDAYS_API_KEY')
+EMAIL_CHECK_URL = "https://emailvalidation.abstractapi.com/v1"
+IP_INFO_URL = "https://ipgeolocation.abstractapi.com/v1"
+HOLIDAY_INFO_URL = "https://holidays.abstractapi.com/v1"
+
+
+# celery
+CELERY_BROKER_URL = env.str("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = env.str("CELERY_RESULT_BACKEND")
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
