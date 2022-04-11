@@ -61,3 +61,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.save()
         save_user_sign_up_date_info.delay(user.id)
         return user
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "username", "email"]

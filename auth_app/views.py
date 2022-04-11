@@ -1,11 +1,13 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.http import Http404
 from django.utils import timezone
 from rest_framework import status, exceptions, generics, response
 from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .serializers import LoginSerializer, RegisterSerializer
+from .serializers import LoginSerializer, RegisterSerializer, UserSerializer
 
 
 class LoginView(generics.GenericAPIView):
@@ -36,3 +38,15 @@ class SignUpView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
+
+
+class UserDataView(generics.GenericAPIView):
+    serializer_class = UserSerializer
+
+    def get(self, _, pk):
+        user = User.objects.filter(id=pk).first()
+        if not user:
+            raise Http404
+
+        serializer = self.get_serializer(instance=user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
