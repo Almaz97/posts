@@ -6,14 +6,16 @@ from .models import Post
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ["id", "title", "context", "user", "likes"]
+        fields = ["id", "title", "context", "user", "likes", "created_at"]
 
         extra_kwargs = {
             "user": {
                 "required": False
             },
             "likes": {
-                "required": False,
+                "read_only": True
+            },
+            "created_at": {
                 "read_only": True
             }
         }
